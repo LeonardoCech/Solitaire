@@ -1,0 +1,383 @@
+body { /* Here the page background style is defined*/
+
+/* The "overflow" proppriety makes the non-scrollable page */
+overflow: hidden;
+
+/* Here, I set the main font*/
+font-family: sans-serif;
+
+/* The "radial-gradient" make the background shadow effect*/
+background-image: radial-gradient( gray,black );
+}
+
+/* Here is defined the "Back" icon used in the "buy"*/
+span img { 
+width  : 80%;
+display: none;
+margin : 35% 0 0 10%;
+}
+
+/* The header is the zone with the mounts "buy" and "bought"*/ 
+.header { 
+width : 910px;
+height: 162px;
+margin: 0 auto;
+margin-top: 25px;
+margin-bottom: 30px;
+}
+
+/* Here the proportions of the positions of the playing cards are defined*/   
+.buy-mount , .bought-mount, .final-mount{
+float : left;
+width : 110px;
+height: 160px;
+margin: 0 10px 0 0;
+border: 2px solid white; 
+border-radius: 10px;
+}
+
+.final-mount { float: right; }
+
+.mounts {
+width : 910px;
+height: 430px;
+margin: 0 auto;
+}
+
+.mounts div {
+float : left;
+width : 120px;
+height: 170px;
+margin: 0 10px 0 0;
+}
+
+.mounts div div, .buy-mount div , 
+.bought-mount div, .final-mount div{
+
+color : gray; /* Do you know? the "color" property sets the font color :)*/
+width : 100px;
+height: 150px;
+
+padding: 5px; /* the "padding" property is like a inside margin */
+display: none;
+position: relative;
+border-radius: 10px;
+background-size: 100%;
+}
+
+/* Below, the most important definitions: the playing cards positions in the page.
+The "z-index" propriety defines the <div> like a layer.
+this propriety value is like a "layer level".
+*/
+#a-0-0,  #a-1-0,  #b-0-0,  #b-1-0,  #b-2-0,  #b-3-0  { z-index: 1;}
+#a-0-1,  #a-1-1,  #b-0-1,  #b-1-1,  #b-2-1,  #b-3-1  { z-index: 2; top: -160px;} 
+#a-0-2,  #a-1-2,  #b-0-2,  #b-1-2,  #b-2-2,  #b-3-2  { z-index: 3; top: -320px;}
+#a-0-3,  #a-1-3,  #b-0-3,  #b-1-3,  #b-2-3,  #b-3-3  { z-index: 4; top: -480px;}
+#a-0-4,  #a-1-4,  #b-0-4,  #b-1-4,  #b-2-4,  #b-3-4  { z-index: 5; top: -640px;}
+#a-0-5,  #a-1-5,  #b-0-5,  #b-1-5,  #b-2-5,  #b-3-5  { z-index: 6; top: -800px;}
+#a-0-6,  #a-1-6,  #b-0-6,  #b-1-6,  #b-2-6,  #b-3-6  { z-index: 7; top: -960px;}
+#a-0-7,  #a-1-7,  #b-0-7,  #b-1-7,  #b-2-7,  #b-3-7  { z-index: 8; top:-1120px;}
+#a-0-8,  #a-1-8,  #b-0-8,  #b-1-8,  #b-2-8,  #b-3-8  { z-index: 9; top:-1280px;}
+#a-0-9,  #a-1-9,  #b-0-9,  #b-1-9,  #b-2-9,  #b-3-9  { z-index:10; top:-1440px;}
+#a-0-10, #a-1-10, #b-0-10, #b-1-10, #b-2-10, #b-3-10 { z-index:11; top:-1600px;}
+#a-0-11, #a-1-11, #b-0-11, #b-1-11, #b-2-11, #b-3-11 { z-index:12; top:-1760px;}
+#a-0-12, #a-1-12, #b-0-12, #b-1-12, #b-2-12, #b-3-12 { z-index:13; top:-1920px;}
+#a-0-13, #a-1-13  { z-index:14; top:-2080px;}
+#a-0-14, #a-1-14  { z-index:15; top:-2240px;}
+#a-0-15, #a-1-15  { z-index:16; top:-2400px;}
+#a-0-16, #a-1-16  { z-index:17; top:-2560px;}
+#a-0-17, #a-1-17  { z-index:18; top:-2720px;}
+#a-0-18, #a-1-18  { z-index:19; top:-2880px;}
+#a-0-19, #a-1-19  { z-index:20; top:-3040px;}
+#a-0-20, #a-1-20  { z-index:21; top:-3200px;}
+#a-0-21, #a-1-21  { z-index:22; top:-3360px;}
+#a-0-22, #a-1-22  { z-index:23; top:-3520px;}
+#a-0-23, #a-1-23  { z-index:24; top:-3680px;}
+
+#c-0-0,  #c-1-0,  #c-2-0,  #c-3-0,  #c-4-0,  #c-5-0,  #c-6-0  { z-index: 1;}
+#c-0-1,  #c-1-1,  #c-2-1,  #c-3-1,  #c-4-1,  #c-5-1,  #c-6-1  { z-index: 2; top: -140px;}
+#c-0-2,  #c-1-2,  #c-2-2,  #c-3-2,  #c-4-2,  #c-5-2,  #c-6-2  { z-index: 3; top: -280px;}
+#c-0-3,  #c-1-3,  #c-2-3,  #c-3-3,  #c-4-3,  #c-5-3,  #c-6-3  { z-index: 4; top: -420px;}
+#c-0-4,  #c-1-4,  #c-2-4,  #c-3-4,  #c-4-4,  #c-5-4,  #c-6-4  { z-index: 5; top: -560px;}
+#c-0-5,  #c-1-5,  #c-2-5,  #c-3-5,  #c-4-5,  #c-5-5,  #c-6-5  { z-index: 6; top: -700px;}
+#c-0-6,  #c-1-6,  #c-2-6,  #c-3-6,  #c-4-6,  #c-5-6,  #c-6-6  { z-index: 7; top: -840px;}
+#c-0-7,  #c-1-7,  #c-2-7,  #c-3-7,  #c-4-7,  #c-5-7,  #c-6-7  { z-index: 8; top: -980px;}
+#c-0-8,  #c-1-8,  #c-2-8,  #c-3-8,  #c-4-8,  #c-5-8,  #c-6-8  { z-index: 9; top:-1120px;}
+#c-0-9,  #c-1-9,  #c-2-9,  #c-3-9,  #c-4-9,  #c-5-9,  #c-6-9  { z-index:10; top:-1260px;}
+#c-0-10, #c-1-10, #c-2-10, #c-3-10, #c-4-10, #c-5-10, #c-6-10 { z-index:11; top:-1400px;}
+#c-0-11, #c-1-11, #c-2-11, #c-3-11, #c-4-11, #c-5-11, #c-6-11 { z-index:12; top:-1540px;}
+#c-0-12, #c-1-12, #c-2-12, #c-3-12, #c-4-12, #c-5-12, #c-6-12 { z-index:13; top:-1680px;}
+#c-0-13, #c-1-13, #c-2-13, #c-3-13, #c-4-13, #c-5-13, #c-6-13 { z-index:13; top:-1820px;}
+#c-0-14, #c-1-14, #c-2-14, #c-3-14, #c-4-14, #c-5-14, #c-6-14 { z-index:13; top:-1960px;}
+#c-0-15, #c-1-15, #c-2-15, #c-3-15, #c-4-15, #c-5-15, #c-6-15 { z-index:13; top:-2100px;}
+#c-0-16, #c-1-16, #c-2-16, #c-3-16, #c-4-16, #c-5-16, #c-6-16 { z-index:13; top:-2240px;}
+#c-0-17, #c-1-17, #c-2-17, #c-3-17, #c-4-17, #c-5-17, #c-6-17 { z-index:13; top:-2380px;}
+#c-0-18, #c-1-18, #c-2-18, #c-3-18, #c-4-18, #c-5-18, #c-6-18 { z-index:13; top:-2520px;}
+
+/* The "stats container" is a <div> that contains the time and score. */
+#stats_container {
+width : 100px;
+height: 100px;
+float : left;
+
+position: relative;
+margin  : -5px 0 0 30px; 
+font-size: 20px;
+}
+
+#stats_container h4 {
+width : 90%; 
+text-align: center;
+color: white;
+margin: 0 0 2px;
+}
+
+#stats_container span { 
+position: absolute;
+color: white;
+width : 90%; 
+text-align: center;
+}
+
+#reset_bttn, #pause_bttn {
+bottom: 15;
+width : 60px;
+height: 60px;
+position: absolute;
+font-size: 18px; 
+z-index: 900;
+border-radius: 360px;
+background: rgba(0,0,0,0);
+margin: 25px 15px 15px 15px;
+}
+
+#reset_bttn { right: 30; }
+
+#pause_bttn { 
+right: 110; 
+filter: invert(100%);
+border: 2px solid black; 
+background-size: 100%;
+}
+
+#reset_bttn img {
+width : 130%;
+margin: -1px 0 0 -6px;
+filter: invert(100%);
+}
+
+#reset_bttn img:hover, #reset:hover {  
+animation: loop 0.5s linear;
+}
+
+#pause_bttn:hover {
+animation: zoom 2s linear;
+}
+
+@keyframes loop {
+0%   { transform: rotate(0deg)}
+100% { transform: rotate(360deg);}
+}
+
+@keyframes zoom {
+0%  { filter: invert(100%); }
+50% { filter: invert(50%); }
+100%{ filter: invert(100%); }
+}
+
+/* Here is to when the player wons the game...
+If do you want to test, just type "display: block;".*/
+
+#GameOverScreen {
+top   : 0vh;
+left  : 0vw;
+width : 100%;
+height: 100%;
+
+z-index   : 1000;
+display   : none;
+position  : absolute;
+animation : flash 1s linear;
+background: rgba(255,255,255,0.3);
+}
+
+/* The @keyframes is to set the animations */
+@keyframes flash {
+0%   { background: white; }
+100% { background: rgba(255,255,255,0.7);}
+}
+
+/* here the <h1> styles, that's the title */
+#GameOverScreen h1 {
+font-size  : 100px;
+text-align : center;  
+
+margin   : 200px 0 0 0;
+animation: gameOverTitle 2s linear;
+}
+
+#pause_title { 
+position: absolute; 
+font-size  : 100px;
+margin: 200px 0 0 40vw;
+z-index: 90;
+color: white;
+display: none; 
+}
+
+@keyframes gameOverTitle {
+0%   { color: rgba(250,250,250,0.7); }
+100% { color: black;}
+}
+
+#GameOverScreen button {
+width : 250px;
+height:  80px;
+color : white;
+
+font-size    : 40px;
+border-radius: 70px;
+background   : lightgray;
+margin       : 20vh 0 0 42vw;
+}
+
+#GameOverScreen button:hover {
+background: rgba(0,255,0,0.3);
+border    : 5px solid darkgray;
+}
+
+#GameOverBG {
+position: absolute;
+display: none;
+width : 100%;
+height: 100%;
+z-index: 100;
+left: 0;
+background-color: rgb(30,30,30);
+transition: 0.15s;
+}
+
+p {
+bottom: 0;
+color : white;
+font-size: 12px; 
+position : absolute;
+}
+
+#options { 
+bottom  : 50; 
+width   : 40px;
+height  : 40px;
+position: absolute;
+
+border-radius   : 40%;
+background-color: lightgray;
+}
+
+#options img {
+width : 100%;
+margin: 1.7px 0 0 0.1px;
+}
+
+#options img:hover {
+animation: config 2s linear;
+filter   : url('config.svg#options img');
+}
+
+@keyframes config {
+
+0%   { transform: rotate(0deg)  ; filter: invert(0%);}
+50%  { filter : invert(20%); }
+100% { transform: rotate(300deg); filter: invert(0%);}
+}
+
+#changelog {
+font-size: 18px;
+margin: 0 0 10px 15px;
+color: gray;
+}
+#changelog:hover { text-decoration: underline; }
+
+#config_list {
+width : 80%;
+height: 80%;
+margin: 1% 9% 9% 9%;
+}
+
+#config_list input { 
+width : 40px;
+height: 40px;
+}
+
+#config_list label {
+position: relative;
+font-size: 23px;
+top: -8;
+}
+
+#changelog_page, #warning_page {
+position: absolute;
+z-index: 900;
+left: 0;
+bottom: 50;
+width : auto;
+height: auto;
+background-color: white;
+border-radius: 10px;
+padding: 15px 30px 15px 15px;
+color: rgba(0,0,0,0.6);
+display: none;
+font-size: 15px;
+}
+
+p span { 
+position:  absolute;
+margin-left: 15px;
+z-index: 900;
+text-decoration: underline;
+font-size: 12px;
+}
+
+#sureToReload {
+z-index: 52;
+width : 400px;
+height:  150px;
+display: none;
+border-radius: 4%;
+position: absolute;
+margin: 42vh 0 0 35vw;
+text-align: center;
+font-size: 23px;
+background-color: rgb(250,250,250);
+animation: delaySureShow 0.2s linear;
+}
+
+#sureToBG  {
+position: absolute;
+display: block;
+width : 100%;
+height: 100%;
+z-index: 51;
+left: 0;
+background-color: rgba(30,30,30,0.8);
+transition: 0.15s;
+}
+
+@keyframes delaySureShow {
+0%  { opacity: 0; }
+100%{ opacity: 1; }
+}
+
+#sureToReload button { 
+width : 120px;
+height:  40px;
+margin: 20px 0;
+border-radius: 10px;
+font-size: 20px;
+}
+
+#sureToReload button:hover {
+border: 2px solid rgb(30,255,30);
+background: white;
+transition: 0.5s;
+}

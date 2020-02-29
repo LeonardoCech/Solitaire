@@ -1,0 +1,383 @@
+<!-- Solitaire: Developed by Leonardo Cech 
+[ github : LeonardoCech ] 
+[ moz://a: UnrealLion ] . 
+No rights reserved. 
+
+     Begin : 11-01-2018.
+  last mod.: 29-02-2020.
+
+    Version: Alpha 1.4.2
+
+Bug: 
+  Time don't stop in Game Over Screen
+-->
+<html>
+  <head>
+    <title>Solitaire - by Leonardo Cech</title> 
+    <!-- 
+      The <style> makes a styles in the elements. 
+      It's more appropriate to use a .css file, but I will not use it because I want the
+      algorithm in a file only.
+    -->
+    
+    <link rel="stylesheet" href="style.css">
+
+</head>
+   
+<body>
+
+  <div id = "GameOverScreen">
+    <h1>You won!!</h1>
+    <button onclick="closeGameOver()">Restart</button>
+  </div>
+
+  <div id = "GameOverBG"></div>
+
+  <h1 id = "pause_title"><h1>
+  <div id = "sureToBG"></div>
+
+  <div id = "sureToReload">       <br>
+    <span>Are you sure about this?<br>The game will restart</span> <br> 
+    <button id = "noSure" onclick="SureReloadPage(this.id)">No</button>
+    <button id = "yesSure" onclick="SureReloadPage(this.id)">Yes</button>
+  </div>
+
+  <div id = "warning_page">
+    <ul> 
+      <li>In case of low connection <br>some textures can delay a second to load;</li>
+      <li>Is recomended 90% of zoom in the page;</li>
+      <li>Good game ;-)</li>
+    </ul>
+    <a style = "float: right; color : rgba(0,0,0,0.6);" onclick = "closeWarning()">close</a> 
+  </div>
+
+  <div id = "changelog_page">      
+    <ul>   
+      <b>Changelog</b>                  <br>
+      Alpha 1.4.1 - December 13th, 2018. 
+      <hr>
+      <li>Now hover on cards makes a border;</li>
+      <li>Now you can Pause ( ͡° ͜ʖ ͡°) ;</li> 
+      <li>Time & Score;</li> 
+      <li>Optmized textures;</li>       <br>
+      Coming soon: 
+      <li>Undo (Under development);</li>  
+      <li>Choose textures;</li>  
+      
+      <li>Best scores list.</li>
+    </ul> 
+    <a style = "float: right; color : rgba(0,0,0,0.6);" onclick = "closeChangelog()">close</a>
+  </div>                                                <br>
+
+  <div class="container">
+    <div class="header">
+      <div class="buy-mount" title="Buy">
+        <div id = "a-0-0"  onclick = "buyToBought(this.id)" ></div>
+        <div id = "a-0-1"  onclick = "buyToBought(this.id)" ></div>
+        <div id = "a-0-2"  onclick = "buyToBought(this.id)" ></div>
+        <div id = "a-0-3"  onclick = "buyToBought(this.id)" ></div>
+        <div id = "a-0-4"  onclick = "buyToBought(this.id)" ></div>
+        <div id = "a-0-5"  onclick = "buyToBought(this.id)" ></div>
+        <div id = "a-0-6"  onclick = "buyToBought(this.id)" ></div>
+        <div id = "a-0-7"  onclick = "buyToBought(this.id)" ></div>
+        <div id = "a-0-8"  onclick = "buyToBought(this.id)" ></div>
+        <div id = "a-0-9"  onclick = "buyToBought(this.id)" ></div>
+        <div id = "a-0-10" onclick = "buyToBought(this.id)" ></div>
+        <div id = "a-0-11" onclick = "buyToBought(this.id)" ></div>
+        <div id = "a-0-12" onclick = "buyToBought(this.id)" ></div>
+        <div id = "a-0-13" onclick = "buyToBought(this.id)" ></div>
+        <div id = "a-0-14" onclick = "buyToBought(this.id)" ></div>
+        <div id = "a-0-15" onclick = "buyToBought(this.id)" ></div>
+        <div id = "a-0-16" onclick = "buyToBought(this.id)" ></div>
+        <div id = "a-0-17" onclick = "buyToBought(this.id)" ></div>
+        <div id = "a-0-18" onclick = "buyToBought(this.id)" ></div>
+        <div id = "a-0-19" onclick = "buyToBought(this.id)" ></div>
+        <div id = "a-0-20" onclick = "buyToBought(this.id)" ></div>
+        <div id = "a-0-21" onclick = "buyToBought(this.id)" ></div>
+        <div id = "a-0-22" onclick = "buyToBought(this.id)" ></div>
+        <div id = "a-0-23" onclick = "buyToBought(this.id)" ></div>
+        <span onclick = "resetBuyMount();"><img id = "reset" src="src/reset.png" title="Back"></span>
+      </div>
+
+      <div class = "bought-mount">
+        <div id = "a-1-0"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "a-1-1"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "a-1-2"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "a-1-3"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "a-1-4"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "a-1-5"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "a-1-6"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "a-1-7"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "a-1-8"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "a-1-9"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "a-1-10" onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "a-1-11" onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "a-1-12" onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "a-1-13" onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "a-1-14" onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "a-1-15" onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "a-1-16" onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "a-1-17" onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "a-1-18" onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "a-1-19" onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "a-1-20" onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "a-1-21" onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "a-1-22" onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "a-1-23" onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      </div>
+
+      <div id = "stats_container">
+        <br>
+        <h4>Time</h4>
+        <span id = "timer">00:00</span> <br><br>
+        <h4>Score</h4>
+        <span id = "score">0</span>                                               
+      </div>
+
+      <div class="final-mount" id = "diamonds-mount" title="Diamonds mount">
+        <div id = "b-0-0"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-0-1"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-0-2"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-0-3"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-0-4"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-0-5"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-0-6"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-0-7"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-0-8"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-0-9"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-0-10" onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-0-11" onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-0-12" onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      </div>
+
+      <div class="final-mount" id = "spades-mount" title="Spades mount">
+        <div id = "b-1-0"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-1-1"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-1-2"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-1-3"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-1-4"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-1-5"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-1-6"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-1-7"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-1-8"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-1-9"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-1-10" onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-1-11" onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-1-12" onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      </div>
+
+      <div class="final-mount" id = "clubs-mount" title="Clubs mount">
+        <div id = "b-2-0"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-2-1"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-2-2"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-2-3"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-2-4"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-2-5"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-2-6"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-2-7"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-2-8"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-2-9"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-2-10" onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-2-11" onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-2-12" onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      </div>
+
+      <div class="final-mount" id = "hearts-mount" title="Hearts mount">
+        <div id = "b-3-0"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-3-1"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-3-2"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-3-3"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-3-4"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-3-5"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-3-6"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-3-7"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-3-8"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-3-9"  onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-3-10" onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-3-11" onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+        <div id = "b-3-12" onclick="selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mounts">
+    <div class="mount1">
+      <div id = "c-0-0"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-0-1"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-0-2"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-0-3"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-0-4"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-0-5"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-0-6"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-0-7"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-0-8"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-0-9"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-0-10"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-0-11"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-0-12"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-0-13"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-0-14"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-0-15"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-0-16"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-0-17"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-0-18"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-0-19"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+    </div>
+
+    <div class="mount2">
+      <div id = "c-1-0"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-1-1"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-1-2"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-1-3"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-1-4"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-1-5"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-1-6"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-1-7"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-1-8"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-1-9"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-1-10"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-1-11"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-1-12"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-1-13"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-1-14"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-1-15"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-1-16"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-1-17"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-1-18"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-1-19"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+    </div>
+
+    <div class="mount3">
+      <div id = "c-2-0"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-2-1"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-2-2"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-2-3"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-2-4"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-2-5"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-2-6"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-2-7"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-2-8"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-2-9"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-2-10"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-2-11"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-2-12"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-2-13"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-2-14"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-2-15"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-2-16"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-2-17"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-2-18"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-2-19"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+    </div>
+
+    <div class="mount4">
+      <div id = "c-3-0"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-3-1"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-3-2"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-3-3"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-3-4"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-3-5"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-3-6"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-3-7"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-3-8"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-3-9"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-3-10"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-3-11"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-3-12"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-3-13"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-3-14"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-3-15"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-3-16"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-3-17"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-3-18"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-3-19"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+    </div>
+
+    <div class="mount5">
+      <div id = "c-4-0"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-4-1"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-4-2"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-4-3"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-4-4"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-4-5"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-4-6"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-4-7"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-4-8"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-4-9"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-4-10"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-4-11"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-4-12"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-4-13"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-4-14"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-4-15"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-4-16"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-4-17"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-4-18"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-4-19"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+    </div>
+
+    <div class="mount6">
+      <div id = "c-5-0"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-5-1"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-5-2"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-5-3"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-5-4"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-5-5"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-5-6"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-5-7"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-5-8"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-5-9"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-5-10"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-5-11"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-5-12"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-5-13"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-5-14"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-5-15"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-5-16"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-5-17"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-5-18"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-5-19"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+    </div>
+
+    <div class="mount7">
+      <div id = "c-6-0"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-6-1"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-6-2"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-6-3"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-6-4"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-6-5"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-6-6"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-6-7"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-6-8"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-6-9"   onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-6-10"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-6-11"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-6-12"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-6-13"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-6-14"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-6-15"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-6-16"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-6-17"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-6-18"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+      <div id = "c-6-19"  onclick = "selected(this.id); change(this.id)" onmouseover="makesBorder(this.id)" onmouseout="destroyBorder(this.id)"></div>
+    </div>
+  </div>
+
+  <p id = "footer">
+    <span title = "See the advices" onclick = "openWarning()">Warning</span>  <br>
+    <span title = "Click to se what's new! :)" 
+          onclick = "openChangelog()">Changelog
+    </span>                                                               <br><br>             
+    Version: Alpha 1.4.2 <br>
+    Solitaire - Developed by Leonardo Cech
+    <br><a style = "color: white;" href = "https://github.com/LeonardoCech" title = "Click to Visit" target = "_blank"> [ github: LeonardoCech ]</a> 
+    , <br>Brazil. 2018, No right reserved.
+  </p> 
+  <button id = "pause_bttn" onclick = "pauseCont++" title = "Pause"></button> 
+  <button id = "reset_bttn" onclick = "reloadPage()" title = "Restart match (or press 'R')">
+    <img src = "src/refresh.png"/>
+  </button>
+
+  <script src="script.js"></script>
+</body>
+</html> 
